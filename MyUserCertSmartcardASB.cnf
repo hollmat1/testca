@@ -1,0 +1,16 @@
+[ req ]
+default_bits = 2048
+default_keyfile     = mytestca.key
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[ dn ]
+CN = mholland_adm@mytestca.com
+
+[ v3_req ]
+keyUsage            = digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth, emailProtection, msSmartcardLogin
+subjectAltName = otherName:msUPN;UTF8:mholland_adm@ad.onprem.net, email:mholland_adm@ad.onprem.net
+crlDistributionPoints = URI:http://labsrvapp01.gbl.ad.onprem.net/CA/MyTestCA/MyTestCA.crl

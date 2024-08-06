@@ -1,0 +1,22 @@
+[ req ]
+default_bits = 2048
+default_keyfile     = mytestca.key
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[ dn ]
+C=CH
+ST=BS
+L=Basel
+O=IT
+OU=Test
+emailAddress=mh@test.com
+CN = matt.holland@mytestca.com
+
+[ v3_req ]
+keyUsage            = digitalSignature, keyEncipherment
+extendedKeyUsage    = clientAuth
+subjectAltName=otherName:msUPN;UTF8:sb@sb.local
+

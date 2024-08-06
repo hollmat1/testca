@@ -1,0 +1,25 @@
+[ req ]
+default_bits = 2048
+default_keyfile     = mytestca.key
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[ dn ]
+C=CH
+ST=BS
+L=Basel
+O=IT
+OU=Test
+emailAddress=mh@test.com
+CN = labsrvaadca1.gbl.ad.onprem.net
+
+[ v3_req ]
+keyUsage            = digitalSignature, keyEncipherment
+extendedKeyUsage    = serverAuth, clientAuth
+subjectAltName      = @alternate_names
+
+[ alternate_names ]
+DNS.1   = labsrvaadca1.gbl.ad.onprem.net
+DNS.2   = labsrvaadca1.aswissbank.com
