@@ -102,17 +102,17 @@ function Invoke-RunAsWithCert
     $useCachedCRLOnlyAndIgnoreRevocationUnknownErrors = (Get-ItemProperty -Path $paramPath).UseCachedCRLOnlyAndIgnoreRevocationUnknownErrors
 
     try {
-        if (!$PatchLsass.IsPresent) {
-            if ($standaloneKdcValidation -ne 0) {
-                Set-ItemProperty -Path $paramPath -Name "StandaloneKdcValidation" -Value 0 -ErrorAction Stop
-            }
-            if ($useCachedCRLOnlyAndIgnoreRevocationUnknownErrors -ne 1) {
-                Set-ItemProperty -Path $paramPath -Name "UseCachedCRLOnlyAndIgnoreRevocationUnknownErrors" -Value 1 -ErrorAction Stop
-            }
-        }
+        #if (!$PatchLsass.IsPresent) {
+        #    if ($standaloneKdcValidation -ne 0) {
+        #        Set-ItemProperty -Path $paramPath -Name "StandaloneKdcValidation" -Value 0 -ErrorAction Stop
+        #    }
+        #    if ($useCachedCRLOnlyAndIgnoreRevocationUnknownErrors -ne 1) {
+        #        Set-ItemProperty -Path $paramPath -Name "UseCachedCRLOnlyAndIgnoreRevocationUnknownErrors" -Value 1 -ErrorAction Stop
+        #    }
+        #}
 
         Add-Type -TypeDefinition $Source -Language CSharp;    
-        [RunAsWithCert]::RunAs($Certificate, $Domain, $Password, $Command, $PatchLsass.IsPresent, $DbgHelpPath);
+        [RunAsWithCert]::RunAs($Certificate, $Domain, $Password, $Command);
     } catch {
         throw
     } finally {
@@ -353,7 +353,7 @@ public class RunAsWithCert
         return name;
     }
 
-    public static void RunAs(string certificate, string domain, string password, string command, bool patchLsass, string dbghelp)
+    public static void RunAs(string certificate, string domain, string password, string command)
     {
         IntPtr address = IntPtr.Zero;
         IntPtr hProcess = IntPtr.Zero;
